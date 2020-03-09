@@ -13,8 +13,8 @@ class NetworkManger{
     
     static var shared: NetworkManger = NetworkManger()
      
-    func search(query: String, completionHandler : @escaping (Result<[String : Any]>)-> Void){
-        let urlRequest: NetworkRoute = NetworkRoute.searchForRecipe(queryText: query)
+    func search(query: String,from: Int = 0, completionHandler: @escaping (Result<[String : Any]>)-> Void){
+        let urlRequest: NetworkRoute = NetworkRoute.searchForRecipe(queryText: query, from: from)
         Alamofire.request(urlRequest).responseJSON { (response) in
             switch response.result{
             case .success(let value):

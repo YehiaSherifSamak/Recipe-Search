@@ -22,6 +22,8 @@
 		85806D9A2411303F006E416C /* NetworkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85806D992411303F006E416C /* NetworkRoute.swift */; };
 		85806D9C241408FC006E416C /* RecipeTableViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85806D9B241408FC006E416C /* RecipeTableViewPresenter.swift */; };
 		85806D9F24143FE5006E416C /* UIImageViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85806D9E24143FE5006E416C /* UIImageViewExtention.swift */; };
+		85806DA124145126006E416C /* HealthLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85806DA024145126006E416C /* HealthLabelCollectionViewCell.swift */; };
+		85CA469424167D6B00887878 /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA469324167D6B00887878 /* DetailedViewController.swift */; };
 		C9483E8A6EAE552C9D1907D4 /* Pods_Recipe_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E12E63ACC577B6774108092C /* Pods_Recipe_Search.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +61,8 @@
 		85806D992411303F006E416C /* NetworkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRoute.swift; sourceTree = "<group>"; };
 		85806D9B241408FC006E416C /* RecipeTableViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewPresenter.swift; sourceTree = "<group>"; };
 		85806D9E24143FE5006E416C /* UIImageViewExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtention.swift; sourceTree = "<group>"; };
+		85806DA024145126006E416C /* HealthLabelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthLabelCollectionViewCell.swift; sourceTree = "<group>"; };
+		85CA469324167D6B00887878 /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
 		E12E63ACC577B6774108092C /* Pods_Recipe_Search.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recipe_Search.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -134,6 +138,8 @@
 			children = (
 				85806D902411116F006E416C /* RecipeTableViewCell.swift */,
 				85806D95241113C6006E416C /* RecipesTableViewController.swift */,
+				85806DA024145126006E416C /* HealthLabelCollectionViewCell.swift */,
+				85CA469324167D6B00887878 /* DetailedViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -370,6 +376,8 @@
 			files = (
 				85806D6F240FDB43006E416C /* ViewController.swift in Sources */,
 				85806D6B240FDB43006E416C /* AppDelegate.swift in Sources */,
+				85CA469424167D6B00887878 /* DetailedViewController.swift in Sources */,
+				85806DA124145126006E416C /* HealthLabelCollectionViewCell.swift in Sources */,
 				85806D9824112A9F006E416C /* NetworkManger.swift in Sources */,
 				85806D6D240FDB43006E416C /* SceneDelegate.swift in Sources */,
 				85806D912411116F006E416C /* RecipeTableViewCell.swift in Sources */,

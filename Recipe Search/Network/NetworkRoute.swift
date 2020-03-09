@@ -11,7 +11,7 @@ import Alamofire
 
 enum NetworkRoute: URLRequestConvertible{
    
-    case searchForRecipe(queryText: String)
+    case searchForRecipe(queryText: String, from: Int = 0)
     
     func asURLRequest() throws -> URLRequest {
         var url: URL {
@@ -27,8 +27,8 @@ enum NetworkRoute: URLRequestConvertible{
         let appKey: String = "8be3cea3bae5cb03c735d869093d05af"
         var parameters: [String : String]{
             switch self {
-            case .searchForRecipe(let query):
-                return ["q": query, "app_id" : appID, "app_key" : appKey]
+            case .searchForRecipe(let query, let from):
+                return ["q": query, "app_id" : appID, "app_key" : appKey, "from" : String(from)]
             }
         }
         let urlRequest : URLRequest = try! URLRequest(url: url, method: method)
