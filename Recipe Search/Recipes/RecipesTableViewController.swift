@@ -8,20 +8,21 @@
 
 import UIKit
 
-protocol RecipesTableView {
+protocol RecipesTableView: class {
     func updateTableView()
     func makeConnectionErrorAlert()
 }
 
 class RecipesTableViewController: UITableViewController {
     
-    let mainSearchController = UISearchController(searchResultsController: nil)
+    private let mainSearchController = UISearchController(searchResultsController: nil)
     var presenter: RecipeTableViewPresenter!
-    var fetchingMore: Bool = false
+    private var fetchingMore: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = RecipeTableViewPresenterClass(view: self)
+        let configurator = RecipesConfiguratorClass()
+        configurator.configure(recipesTableViewController: self)
         self.clearsSelectionOnViewWillAppear = true
         let mainSearchBar = self.mainSearchController.searchBar
         mainSearchBar.delegate = self
@@ -30,19 +31,13 @@ class RecipesTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.getNumberOfRecipes()
+        return presenter.numberOfRecipes
     }
-    
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipe_cell_ID", for: indexPath) as! RecipeTableViewCell
-        cell.fillCellData(recipe: presenter.getRecipe(at: indexPath.row))
+        presenter.configure(cell: cell, forRow: indexPath.row)
         return cell
     }
     
@@ -52,7 +47,6 @@ class RecipesTableViewController: UITableViewController {
         mainSearchController.searchBar.placeholder = "Search Recipes"
         navigationItem.searchController = mainSearchController
         definesPresentationContext = true
-        
     }
     
     func makeAnAlert(title: String, message: String){
@@ -71,16 +65,11 @@ class RecipesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "detail_segue", sender: nil)
+        presenter.didSelect(row: indexPath.row)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "detail_segue"){
-            let reciverVC = segue.destination as! DetailedViewController;
-            guard let index = tableView.indexPathForSelectedRow?.row else{return}
-            reciverVC.recipe = presenter.getRecipe(at: index)
-        }
-        
+        presenter.router.prepare(for: segue, sender: nil)
     }
 }
 
@@ -98,7 +87,7 @@ extension RecipesTableViewController: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if let text = searchBar.text{
-            presenter.searchForRecipes(query: text)
+            presenter.searchForRecipes(for: text)
         }
         
     }
@@ -114,6 +103,5 @@ extension RecipesTableViewController: RecipesTableView{
         fetchingMore = false
         self.makeAnAlert(title: "Error", message: "Please Check Your Internet Connection")
     }
-    
     
 }

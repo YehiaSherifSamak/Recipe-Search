@@ -11,34 +11,45 @@ import SwiftyJSON
 
 protocol RecipeTableViewPresenter {
     var view: RecipesTableView! {get set}
+    var router: RecipesViewRouter {get}
+    var numberOfRecipes: Int {get}
     func getRecipe(at i: Int)->Recipe
-    func getNumberOfRecipes()->Int
-    func searchForRecipes(query: String)
+    
+    func searchForRecipes(for query: String)
     func requestMoreRecipes()
+    func configure(cell: RecipeViewCell, forRow row: Int)
+    func didSelect(row: Int)
     
 }
 
-class RecipeTableViewPresenterClass: RecipeTableViewPresenter{
+class RecipeTableViewPresenterClass {
     
-
-    var view: RecipesTableView!
-    var recipes:[Recipe]
-    var from: Int
-    var to: Int
-    var count: Int
-    var more: Bool
-    var networkManger: NetworkManger
-    var lastQuery: String?
-    let piviot = 10
     
-    init(view: RecipesTableViewController) {
+   weak var view: RecipesTableView!
+    var router: RecipesViewRouter
+    private var recipes:[Recipe]
+    private var from: Int
+    private var to: Int
+    private var count: Int
+    private var more: Bool
+    private var networkManger: NetworkManger
+    private var lastQuery: String?
+    private let piviot = 10
+    
+    var numberOfRecipes: Int{
+        return recipes.count
+    }
+    
+    init(view: RecipesTableViewController, networkManger: NetworkManger, router: RecipesViewRouter) {
         self.view = view
-        networkManger = NetworkManger.shared
+        self.networkManger = networkManger
+        self.router = router
         from = 0
         to = 10
         count = 0
         more = false
         recipes = [Recipe]()
+        
     }
     
     func parsingJSON(_ json: JSON){
@@ -58,9 +69,6 @@ class RecipeTableViewPresenterClass: RecipeTableViewPresenter{
         return recipes[i]
     }
     
-    func getNumberOfRecipes() -> Int {
-        return recipes.count
-    }
     
     func requestRecipes(query: String){
         networkManger.search(query: query, from: from) { [unowned self] (response) in
@@ -69,7 +77,6 @@ class RecipeTableViewPresenterClass: RecipeTableViewPresenter{
                 let json: JSON = JSON(result)
                 self.parsingJSON(json)
                 self.view.updateTableView()
-              // print(json)
             case .failure(let error):
                 self.view.makeConnectionErrorAlert()
                 print(error)
@@ -77,20 +84,33 @@ class RecipeTableViewPresenterClass: RecipeTableViewPresenter{
         }
     }
     
-    func searchForRecipes(query: String) {
+    
+    
+}
+extension RecipeTableViewPresenterClass: RecipeTableViewPresenter{
+    
+    func searchForRecipes(for query: String) {
         recipes = [Recipe]()
         from = 0
         lastQuery = query
         requestRecipes(query: query)
     }
-      
-      func requestMoreRecipes() {
+    
+    func requestMoreRecipes() {
         guard let query = lastQuery else{return}
         from += piviot
         if more{
             requestRecipes(query: query)
         }
-      }
-      
+    }
+    
+    func configure(cell: RecipeViewCell, forRow row: Int){
+        let recipeCellPresenter: RecipeCellPresenterClass = RecipeCellPresenterClass(recipe: recipes[row], cell: cell)
+        recipeCellPresenter.configure()
+    }
+    func didSelect(row: Int){
+        router.presentDetailsView(for: recipes[row])
+    }
+    
 }
 
