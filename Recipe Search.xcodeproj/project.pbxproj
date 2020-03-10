@@ -29,6 +29,10 @@
 		85CA469D2416C0C500887878 /* RecipesViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA469C2416C0C500887878 /* RecipesViewRouter.swift */; };
 		85CA469F2416D18C00887878 /* DetailedConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA469E2416D18C00887878 /* DetailedConfigurator.swift */; };
 		85CA46A12416E63600887878 /* DetailedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA46A02416E63600887878 /* DetailedPresenter.swift */; };
+		85CA46A32416FBA100887878 /* UIViewControllerExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA46A22416FBA100887878 /* UIViewControllerExtention.swift */; };
+		85CA46A52417B0B400887878 /* SearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA46A42417B0B400887878 /* SearchHistoryTableViewCell.swift */; };
+		85CA46A82417C92300887878 /* DatabaseManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA46A72417C92300887878 /* DatabaseManger.swift */; };
+		85CA46AA2417CE6700887878 /* SearchText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA46A92417CE6700887878 /* SearchText.swift */; };
 		C9483E8A6EAE552C9D1907D4 /* Pods_Recipe_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E12E63ACC577B6774108092C /* Pods_Recipe_Search.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +77,10 @@
 		85CA469C2416C0C500887878 /* RecipesViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewRouter.swift; sourceTree = "<group>"; };
 		85CA469E2416D18C00887878 /* DetailedConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedConfigurator.swift; sourceTree = "<group>"; };
 		85CA46A02416E63600887878 /* DetailedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPresenter.swift; sourceTree = "<group>"; };
+		85CA46A22416FBA100887878 /* UIViewControllerExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtention.swift; sourceTree = "<group>"; };
+		85CA46A42417B0B400887878 /* SearchHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		85CA46A72417C92300887878 /* DatabaseManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManger.swift; sourceTree = "<group>"; };
+		85CA46A92417CE6700887878 /* SearchText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchText.swift; sourceTree = "<group>"; };
 		E12E63ACC577B6774108092C /* Pods_Recipe_Search.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recipe_Search.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -119,6 +127,7 @@
 		85806D69240FDB43006E416C /* Recipe Search */ = {
 			isa = PBXGroup;
 			children = (
+				85CA46A62417C8FF00887878 /* Database */,
 				85CA469624169C6F00887878 /* RecipeDetails */,
 				85CA469524169C1400887878 /* Recipes */,
 				85806D9D24143FCB006E416C /* Extentions */,
@@ -163,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				85806D9324111305006E416C /* Recipe.swift */,
+				85CA46A92417CE6700887878 /* SearchText.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -189,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				85806D9E24143FE5006E416C /* UIImageViewExtention.swift */,
+				85CA46A22416FBA100887878 /* UIViewControllerExtention.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -221,8 +232,17 @@
 				85806DA024145126006E416C /* HealthLabelCollectionViewCell.swift */,
 				85806D902411116F006E416C /* RecipeTableViewCell.swift */,
 				85CA46972416A96D00887878 /* RecipeCellPresenter.swift */,
+				85CA46A42417B0B400887878 /* SearchHistoryTableViewCell.swift */,
 			);
 			path = RecipeTableViewCell;
+			sourceTree = "<group>";
+		};
+		85CA46A62417C8FF00887878 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				85CA46A72417C92300887878 /* DatabaseManger.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 		C5725621A6BE8A51F3C23CCE /* Pods */ = {
@@ -418,6 +438,9 @@
 				85CA469424167D6B00887878 /* DetailedViewController.swift in Sources */,
 				85806DA124145126006E416C /* HealthLabelCollectionViewCell.swift in Sources */,
 				85CA469F2416D18C00887878 /* DetailedConfigurator.swift in Sources */,
+				85CA46AA2417CE6700887878 /* SearchText.swift in Sources */,
+				85CA46A32416FBA100887878 /* UIViewControllerExtention.swift in Sources */,
+				85CA46A82417C92300887878 /* DatabaseManger.swift in Sources */,
 				85806D9824112A9F006E416C /* NetworkManger.swift in Sources */,
 				85CA469D2416C0C500887878 /* RecipesViewRouter.swift in Sources */,
 				85CA46A12416E63600887878 /* DetailedPresenter.swift in Sources */,
@@ -427,6 +450,7 @@
 				85806D96241113C6006E416C /* RecipesTableViewController.swift in Sources */,
 				85806D9A2411303F006E416C /* NetworkRoute.swift in Sources */,
 				85806D9C241408FC006E416C /* RecipeTableViewPresenter.swift in Sources */,
+				85CA46A52417B0B400887878 /* SearchHistoryTableViewCell.swift in Sources */,
 				85806D9424111305006E416C /* Recipe.swift in Sources */,
 				85806D9F24143FE5006E416C /* UIImageViewExtention.swift in Sources */,
 				85CA46982416A96D00887878 /* RecipeCellPresenter.swift in Sources */,
