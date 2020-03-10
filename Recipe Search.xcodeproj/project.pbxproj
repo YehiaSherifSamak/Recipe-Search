@@ -32,7 +32,6 @@
 		85CA46A32416FBA100887878 /* UIViewControllerExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA46A22416FBA100887878 /* UIViewControllerExtention.swift */; };
 		85CA46A52417B0B400887878 /* SearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA46A42417B0B400887878 /* SearchHistoryTableViewCell.swift */; };
 		85CA46A82417C92300887878 /* DatabaseManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA46A72417C92300887878 /* DatabaseManger.swift */; };
-		85CA46AA2417CE6700887878 /* SearchText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA46A92417CE6700887878 /* SearchText.swift */; };
 		C9483E8A6EAE552C9D1907D4 /* Pods_Recipe_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E12E63ACC577B6774108092C /* Pods_Recipe_Search.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,7 +79,6 @@
 		85CA46A22416FBA100887878 /* UIViewControllerExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtention.swift; sourceTree = "<group>"; };
 		85CA46A42417B0B400887878 /* SearchHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		85CA46A72417C92300887878 /* DatabaseManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManger.swift; sourceTree = "<group>"; };
-		85CA46A92417CE6700887878 /* SearchText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchText.swift; sourceTree = "<group>"; };
 		E12E63ACC577B6774108092C /* Pods_Recipe_Search.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recipe_Search.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -134,8 +132,6 @@
 				85806D9224111190006E416C /* Storyboards */,
 				85806D8F240FDB7D006E416C /* Network */,
 				85806D8E240FDB77006E416C /* Models */,
-				85806D8D240FDB6E006E416C /* Presnters */,
-				85806D8C240FDB5D006E416C /* Views */,
 				85806D6A240FDB43006E416C /* AppDelegate.swift */,
 				85806D6C240FDB43006E416C /* SceneDelegate.swift */,
 				85806D6E240FDB43006E416C /* ViewController.swift */,
@@ -154,25 +150,10 @@
 			path = "Recipe SearchTests";
 			sourceTree = "<group>";
 		};
-		85806D8C240FDB5D006E416C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		85806D8D240FDB6E006E416C /* Presnters */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presnters;
-			sourceTree = "<group>";
-		};
 		85806D8E240FDB77006E416C /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				85806D9324111305006E416C /* Recipe.swift */,
-				85CA46A92417CE6700887878 /* SearchText.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -438,7 +419,6 @@
 				85CA469424167D6B00887878 /* DetailedViewController.swift in Sources */,
 				85806DA124145126006E416C /* HealthLabelCollectionViewCell.swift in Sources */,
 				85CA469F2416D18C00887878 /* DetailedConfigurator.swift in Sources */,
-				85CA46AA2417CE6700887878 /* SearchText.swift in Sources */,
 				85CA46A32416FBA100887878 /* UIViewControllerExtention.swift in Sources */,
 				85CA46A82417C92300887878 /* DatabaseManger.swift in Sources */,
 				85806D9824112A9F006E416C /* NetworkManger.swift in Sources */,

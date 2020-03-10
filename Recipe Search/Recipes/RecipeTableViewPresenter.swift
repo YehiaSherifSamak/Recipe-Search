@@ -27,6 +27,7 @@ class RecipeTableViewPresenterClass {
     
     weak var view: RecipesTableView!
     var router: RecipesViewRouter
+    private let databaseManger: DatabaseManger
     var isSearching = false
     
     private var recipes: [Recipe]
@@ -41,19 +42,52 @@ class RecipeTableViewPresenterClass {
     private let piviot = 10
     
     
-    init(view: RecipesTableViewController, networkManger: NetworkManger, router: RecipesViewRouter) {
+    init(view: RecipesTableViewController, networkManger: NetworkManger, router: RecipesViewRouter, databaseManger: DatabaseManger) {
         self.view = view
         self.networkManger = networkManger
         self.router = router
+        self.databaseManger = databaseManger
         from = 0
         to = 10
         count = 0
         more = false
         recipes = [Recipe]()
-        searchHistory = ["Meat", "Chicken", "Fish"]
+        searchHistory = self.databaseManger.getSavedSearchHistory()
         filteredSearchHistory = [String]()
     }
     
+    //MARK: -Rquesting Recipecs from API function
+    func requestRecipes(query: String){
+        networkManger.search(query: query, from: from) { [unowned self] (response) in
+            switch response{
+            case .success(let result):
+                let json: JSON = JSON(result)
+                self.parsingJSON(json)
+                self.view.updateTableView()
+            case .failure(let error):
+                self.view.makeConnectionErrorAlert()
+                print(error)
+            }
+        }
+    }
+    
+    func searchForRecipes(for query: String) {
+        isSearching = false
+        recipes = [Recipe]()
+        from = 0
+        lastQuery = query
+        requestRecipes(query: query)
+        addNewQueryToSearchHistory(query)
+    }
+    
+    func requestMoreRecipes() {
+        guard let query = lastQuery else{return}
+        from += piviot
+        if more{
+            requestRecipes(query: query)
+        }
+    }
+    //MARK: Parsing JSON
     func parsingJSON(_ json: JSON){
         from = json["from"].intValue
         to = json["to"].intValue
@@ -71,54 +105,14 @@ class RecipeTableViewPresenterClass {
         }
     }
     
-    func requestRecipes(query: String){
-        networkManger.search(query: query, from: from) { [unowned self] (response) in
-            switch response{
-            case .success(let result):
-                let json: JSON = JSON(result)
-                self.parsingJSON(json)
-                self.view.updateTableView()
-            case .failure(let error):
-                self.view.makeConnectionErrorAlert()
-                print(error)
-            }
-        }
-    }
     
 }
 extension RecipeTableViewPresenterClass: RecipeTableViewPresenter{
     
+    //MARK: -Tableview dataSource
+    
     var numberOfCells: Int{
         return (isSearching) ? (view.isFiltering) ? filteredSearchHistory.count: searchHistory.count :  recipes.count
-    }
-    
-    func searchForRecipes(for query: String) {
-        isSearching = false
-        recipes = [Recipe]()
-        from = 0
-        lastQuery = query
-        requestRecipes(query: query)
-        addNewQueryToSearchHistory(query)
-    }
- 
-    func requestMoreRecipes() {
-        guard let query = lastQuery else{return}
-        from += piviot
-        if more{
-            requestRecipes(query: query)
-        }
-    }
-    func addNewQueryToSearchHistory(_ query: String){
-        if !searchHistory.contains(query){
-            searchHistory.insert(query, at: 0)
-            removeLastElementInSearchHistory()
-        }
-    }
-    
-    func removeLastElementInSearchHistory(){
-        if(searchHistory.count > 10){
-            searchHistory.removeLast()
-        }
     }
     
     func configure(cell: RecipeViewCell, forRow row: Int){
@@ -141,6 +135,22 @@ extension RecipeTableViewPresenterClass: RecipeTableViewPresenter{
         
     }
     
+    //MARK: Search bar functions
+    
+    func addNewQueryToSearchHistory(_ query: String){
+        if !searchHistory.contains(query){
+            searchHistory.insert(query, at: 0)
+            removeLastElementInSearchHistory()
+            databaseManger.savingSearchHistory(searchHistory)
+        }
+    }
+    
+    func removeLastElementInSearchHistory(){
+        if(searchHistory.count > 10){
+            searchHistory.removeLast()
+        }
+    }
+    
     func whileSearching(text: String?){
         isSearching = true
         if let query = text{
@@ -159,6 +169,7 @@ extension RecipeTableViewPresenterClass: RecipeTableViewPresenter{
         isSearching = false
         view.updateTableView()
     }
+  
     
 }
 

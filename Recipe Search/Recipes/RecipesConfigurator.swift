@@ -17,7 +17,9 @@ class RecipesConfiguratorClass: RecipesConfigurator{
     func configure(recipesTableViewController: RecipesTableViewController){
         let networkManger: NetworkManger = NetworkManger.shared
         let router: RecipesViewRouterClass = RecipesViewRouterClass(viewController: recipesTableViewController)
-        let presenter: RecipeTableViewPresenterClass = RecipeTableViewPresenterClass(view: recipesTableViewController, networkManger: networkManger, router: router)
+        let databaseManger: DatabaseManger = DatabaseManger.shared
+        let presenter: RecipeTableViewPresenterClass = RecipeTableViewPresenterClass(view: recipesTableViewController, networkManger: networkManger, router: router, databaseManger: databaseManger)
+       
         
         recipesTableViewController.presenter = presenter
     }
